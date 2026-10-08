@@ -94,7 +94,7 @@ pipeline {
                     '''
                 }
             }
-*/        }
+        }*/
         stage('Verify idempotency') {
             steps {
                 ansiblePlaybook(
@@ -117,7 +117,7 @@ pipeline {
                 }
             }
             
-*/       }
+      }*/ 
 
     }
 }
