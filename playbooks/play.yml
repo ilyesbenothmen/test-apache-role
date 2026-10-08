@@ -36,4 +36,3 @@
           </html>
         dest: /var/www/html/index.html
         mode: '0644'
-        
