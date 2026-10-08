@@ -38,19 +38,29 @@ pipeline {
         }
 
         stage('Deploy Apache') {
-            steps {
-                sh '''
-                    ansible-playbook playbooks/play.yml
-                '''
+	    steps {
+                sshagent(credentials: ['ansible-webserver-ssh']) {
+                    sh '''
+                        ansible-playbook \
+                          -i inventory/ci.yml \
+                          playbooks/play.yml
+                    '''
+                }
             }
         }
 
         stage('Verify idempotency') {
-            steps {
-                sh '''
-                    ansible-playbook playbooks/play.yml
-                '''
+	    steps {
+                sshagent(credentials: ['ansible-webserver-ssh']) {
+                    sh '''
+                        ansible-playbook \
+                          -i inventory/ci.yml \
+                          playbooks/play.yml
+                    '''
+                }
             }
+            
         }
+
     }
 }
