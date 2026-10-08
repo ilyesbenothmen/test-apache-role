@@ -11,6 +11,11 @@ pipeline {
             choices: ['dev', 'sit', 'ci'],
             description: 'Choose the deployment environment. Default: dev.'
         )
+        string(
+            name: 'ansibleTags',
+            defaultValue: 'apache',
+            description: 'Comma-separated Ansible tags to run (e.g. install,service,content,apache). Leave as "apache" for full deployment.'
+        )
     }
 
     stages {
@@ -79,6 +84,7 @@ pipeline {
                     playbook: 'playbooks/play.yml',
                     inventory: "${env.INVENTORY_FILE}",
                     credentialsId: 'ansible-webserver-ssh',
+                    extras: "--tags ${params.ansibleTags}",
                     colorized: true
                 )
             }
@@ -101,6 +107,7 @@ pipeline {
                     playbook: 'playbooks/play.yml',
                     inventory: "${env.INVENTORY_FILE}",
                     credentialsId: 'ansible-webserver-ssh',
+                    extras: '--tags apache',
                     colorized: true
                 )
             }

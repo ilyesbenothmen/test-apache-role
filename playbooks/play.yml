@@ -1,7 +1,38 @@
 ---
-- name: Install and configure Apache
+- name: Configure web servers
   hosts: webservers
   become: true
+  gather_facts: true
 
-  roles:
-    - apache
+  tasks:
+    - name: Install Apache package
+      tags:
+        - install
+        - apache
+      ansible.builtin.package:
+        name: "{{ 'httpd' if ansible_facts['os_family'] == 'RedHat' else 'apache2' }}"
+        state: present
+
+    - name: Enable and start Apache service
+      tags:
+        - service
+        - apache
+      ansible.builtin.service:
+        name: "{{ 'httpd' if ansible_facts['os_family'] == 'RedHat' else 'apache2' }}"
+        state: started
+        enabled: true
+
+    - name: Deploy custom index page
+      tags:
+        - content
+        - apache
+      ansible.builtin.copy:
+        content: |
+          <html>
+            <head><title>Apache - Ansible Managed</title></head>
+            <body>
+              <h1>Managed by Ansible from Jenkins</h1>
+            </body>
+          </html>
+        dest: /var/www/html/index.html
+        mode: '0644'
