@@ -84,17 +84,17 @@ pipeline {
             }
         }
 
-#        stage('Deploy Apache') {
-#	    steps {
-#                sshagent(credentials: ['ansible-webserver-ssh']) {
-#                    sh '''
-#                        ansible-playbook \
-#                          -i inventory/ci.yml \
-#                          playbooks/play.yml
-#                    '''
-#                }
-#            }
-#        }
+/*        stage('Deploy Apache') {
+	    steps {
+                sshagent(credentials: ['ansible-webserver-ssh']) {
+                    sh '''
+                        ansible-playbook \
+                          -i inventory/ci.yml \
+                          playbooks/play.yml
+                    '''
+                }
+            }
+*/        }
         stage('Verify idempotency') {
             steps {
                 ansiblePlaybook(
@@ -106,18 +106,18 @@ pipeline {
             }
         }
 
-#        stage('Verify idempotency') {
-#	    steps {
-#                sshagent(credentials: ['ansible-webserver-ssh']) {
-#                    sh '''
-#                        ansible-playbook \
-#                          -i inventory/ci.yml \
-#                          playbooks/play.yml
-#                    '''
-#                }
-#            }
-#            
-#        }
+/*        stage('Verify idempotency') {
+	    steps {
+                sshagent(credentials: ['ansible-webserver-ssh']) {
+                    sh '''
+                        ansible-playbook \
+                          -i inventory/ci.yml \
+                          playbooks/play.yml
+                    '''
+                }
+            }
+            
+*/       }
 
     }
 }
