@@ -3,6 +3,7 @@ all:
   children:
     webservers:
       hosts:
-        172.31.128.21:
+        sit-ubuntu-01:
+          ansible_host: 172.31.128.21
           ansible_user: ubuntu
           
