@@ -10,7 +10,7 @@ pipeline {
 
         stage('Build') {
             steps {
-                echo 'Building PHP project...'
+                echo 'Building Ansible project just for test although ansible need only linting and dry run...'
             }
         }
 
