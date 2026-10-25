@@ -4,6 +4,6 @@ all:
     webservers:
       hosts:
         dev-rhel8-01:
-          ansible_host: 172.31.128.10
+          ansible_host: 172.29.64.3
           ansible_user: ec2-user 
           
