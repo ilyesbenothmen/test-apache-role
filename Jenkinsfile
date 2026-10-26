@@ -1,5 +1,6 @@
 pipeline {
-    agent any
+/*    agent any */
+    agent { label '!built-in' }
 
     stages {
         stage('Checkout') {
